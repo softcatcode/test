@@ -1,6 +1,7 @@
-package com.example.serverinfoviewer.di
+package com.example.serverinfoviewer.di.modules
 
 import androidx.lifecycle.ViewModel
+import com.example.serverinfoviewer.di.ViewModelKey
 import com.example.serverinfoviewer.presentation.ui.users.UsersViewModel
 import com.example.serverinfoviewer.presentation.ui.video.VideoViewModel
 import dagger.Binds

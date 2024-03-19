@@ -5,6 +5,6 @@ import com.example.serverinfoviewer.di.DaggerApplicationComponent
 
 class ServerInfoApplication: Application() {
     val component by lazy {
-        DaggerApplicationComponent.create()
+        DaggerApplicationComponent.factory().create(this)
     }
 }

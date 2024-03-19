@@ -4,7 +4,7 @@
     android:layout_height="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
-    android:backgroundTint="@color/userCardColor"
+    android:backgroundTint="@color/user_card_color"
     android:layout_margin="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +62,7 @@
                 android:layout_weight="6"
                 android:text="name"
                 android:gravity="center"
-                android:textColor="@color/idFieldColor"
+                android:textColor="@color/id_field_color"
                 android:textSize="20sp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginTop="2dp" />
@@ -74,7 +74,7 @@
                 android:layout_weight="5"
                 android:text="phone"
                 android:gravity="center"
-                android:textColor="@color/idFieldColor"
+                android:textColor="@color/id_field_color"
                 android:textSize="20sp"
                 android:layout_marginTop="2dp"
                 android:layout_marginStart="2dp" />

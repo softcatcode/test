@@ -2,4 +2,22 @@
     <string name="app_name">ServerInfoViewer</string>
     <string name="title_users">Users</string>
     <string name="title_video">Video</string>
+    <string name="id_label">id</string>
+    <string name="user_name_label">userName</string>
+    <string name="name_label">name</string>
+    <string name="phone_label">phone</string>
+    <string name="email_label">email</string>
+    <string name="website_label">website</string>
+    <string name="catch_phrase_label">catch phrase</string>
+    <string name="bs_label">bs</string>
+    <string name="street_label">street</string>
+    <string name="city_label">city</string>
+    <string name="suite_label">suite</string>
+    <string name="zipcode_label">zipcode</string>
+    <string name="geo_label">lat/lng</string>
+    <string name="user_label">user color</string>
+    <string name="company_label">company color</string>
+    <string name="address_label">address color</string>
+    <string name="internet_error_message">no internet error</string>
+    <string name="other_error_message">unknown error</string>
 </resources>

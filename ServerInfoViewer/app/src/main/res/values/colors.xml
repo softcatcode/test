@@ -7,6 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="idFieldColor">#61A0EC</color>
-    <color name="userCardColor">#A9D8F1</color>
+    <color name="grey">#807C7C</color>
+    <color name="id_field_color">#61A0EC</color>
+    <color name="user_card_color">#A9D8F1</color>
+    <color name="navigation_bar_color">#2C6C67</color>
+    <color name="user_info_label_color">#AD88F1</color>
+    <color name="company_info_label_color">#F0F3A1</color>
+    <color name="data_label_color">#AAE8AD</color>
+    <color name="address_label_color">#AAE3E8</color>
 </resources>

@@ -1,17 +1,19 @@
 package com.example.serverinfoviewer.presentation.ui.users
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.serverinfoviewer.MainActivity
 import com.example.serverinfoviewer.ServerInfoApplication
 import com.example.serverinfoviewer.databinding.FragmentUsersBinding
-import com.example.serverinfoviewer.di.ApplicationComponent
+import com.example.serverinfoviewer.domain.entities.User
 import com.example.serverinfoviewer.presentation.ViewModelFactory
+import com.example.serverinfoviewer.presentation.activities.UserInfoActivity
+import com.example.serverinfoviewer.presentation.activities.UserInfoActivity.Companion.USER_KEY
 import com.example.serverinfoviewer.presentation.adapters.UserListAdapter
 import javax.inject.Inject
 
@@ -20,6 +22,8 @@ class UsersFragment : Fragment() {
     private var _binding: FragmentUsersBinding? = null
     val binding: FragmentUsersBinding
             get() = _binding ?: throw RuntimeException("Users fragment binding is null")
+
+    private lateinit var userListAdapter: UserListAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -49,19 +53,35 @@ class UsersFragment : Fragment() {
         setupObservers()
     }
 
-    private fun onUserClicked() {
-
+    private fun onUserClicked(user: User) {
+        val intent = Intent(requireActivity(), UserInfoActivity::class.java)
+        val args = Bundle().apply { putSerializable(USER_KEY, user) }
+        intent.putExtras(args)
+        startActivity(intent)
     }
 
     private fun setupObservers() {
-
+        viewModel.userList.observe(viewLifecycleOwner) {
+            when (it) {
+                is UserListState -> {
+                    userListAdapter.submitList(it.list)
+                    binding.progressBar.visibility = View.INVISIBLE
+                }
+                is Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Error -> {
+                    binding.progressBar.visibility = View.INVISIBLE
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun setupRecyclerView() = with(binding) {
         recyclerView.recycledViewPool.setMaxRecycledViews(UserListAdapter.VIEW_TYPE, 10)
-        recyclerView.adapter = UserListAdapter().apply {
+        userListAdapter = UserListAdapter().apply {
             onClickListener = ::onUserClicked
         }
+        binding.recyclerView.adapter = userListAdapter
     }
 
     override fun onDestroyView() {
