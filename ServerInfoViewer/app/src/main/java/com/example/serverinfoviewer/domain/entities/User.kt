@@ -1,5 +1,7 @@
 package com.example.serverinfoviewer.domain.entities
 
+import java.io.Serializable
+
 data class User(
     var name: String = "",
     var userName: String = "",
@@ -9,7 +11,7 @@ data class User(
     var website: String = "",
     var company: Company = Company(),
     val id: Int = UNDEFINED_ID
-) {
+): Serializable {
     companion object {
         const val UNDEFINED_ID = 0
     }
