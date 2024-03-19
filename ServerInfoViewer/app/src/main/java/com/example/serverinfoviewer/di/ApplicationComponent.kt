@@ -1,11 +1,12 @@
 package com.example.serverinfoviewer.di
 
+import com.example.serverinfoviewer.di.modules.DomainModule
 import com.example.serverinfoviewer.di.modules.ViewModelModule
 import com.example.serverinfoviewer.presentation.ui.users.UsersFragment
 import com.example.serverinfoviewer.presentation.ui.video.VideoFragment
 import dagger.Component
 
-@Component(modules = [ViewModelModule::class])
+@Component(modules = [ViewModelModule::class, DomainModule::class])
 interface ApplicationComponent {
 
     fun inject(fragment: UsersFragment)
