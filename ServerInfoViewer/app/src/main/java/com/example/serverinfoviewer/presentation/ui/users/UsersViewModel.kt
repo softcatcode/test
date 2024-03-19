@@ -7,13 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.serverinfoviewer.domain.useCases.GetUsersUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class UsersViewModel @Inject constructor(
     private val getUsersUseCase: GetUsersUseCase
 ): ViewModel() {
 
-    private val _userList = MutableLiveData<UsersViewModelState>(Loading)
+    private val _userList = MutableLiveData<UsersViewModelState>()
     val userList: LiveData<UsersViewModelState>
         get() = _userList
 
@@ -23,6 +24,7 @@ class UsersViewModel @Inject constructor(
 
     private fun load() {
         viewModelScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) { _userList.value = Loading }
             val list = getUsersUseCase()
             _userList.postValue(UserListState(list))
         }

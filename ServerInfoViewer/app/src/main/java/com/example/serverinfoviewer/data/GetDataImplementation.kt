@@ -38,6 +38,7 @@ class GetDataImplementation @Inject constructor(): GetDataInterface {
         userName = json.getString(USER_NAME_KEY),
         email = json.getString(EMAIL_KEY),
         phone = json.getString(PHONE_KEY),
+        website = json.getString(WEBSITE_KEY),
         address = unpackAddress(json.getJSONObject(ADDRESS_KEY)),
         company = unpackCompany(json.getJSONObject(COMPANY_KEY))
     )
@@ -63,6 +64,7 @@ class GetDataImplementation @Inject constructor(): GetDataInterface {
         private const val USER_NAME_KEY = "username"
         private const val EMAIL_KEY = "email"
         private const val PHONE_KEY = "phone"
+        private const val WEBSITE_KEY = "website"
         private const val ADDRESS_KEY = "address"
         private const val COMPANY_KEY = "company"
         private const val LAT_KEY = "lat"
