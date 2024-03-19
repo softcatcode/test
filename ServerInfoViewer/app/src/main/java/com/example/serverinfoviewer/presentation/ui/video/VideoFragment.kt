@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.serverinfoviewer.databinding.FragmentVideoBinding
+
 
 class VideoFragment : Fragment() {
 
@@ -15,7 +17,7 @@ class VideoFragment : Fragment() {
     val binding: FragmentVideoBinding
             get() = _binding ?: throw RuntimeException("Video fragment binding is null")
 
-    private lateinit var exoPlayer: ExoPlayer
+    private lateinit var player: ExoPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,11 +29,12 @@ class VideoFragment : Fragment() {
     }
 
     private fun setupPlayer() {
-        exoPlayer = ExoPlayer.Builder(requireActivity()).build()
-        binding.playerView.player = exoPlayer
+        player = ExoPlayer.Builder(requireActivity().baseContext).build()
+        binding.playerView.player = player
+        //val item = MediaItem.fromUri("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
         val item = MediaItem.fromUri(VIDEO_LINK)
-        exoPlayer.setMediaItem(item)
-        exoPlayer.prepare()
+        player.setMediaItem(item)
+        player.prepare()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,21 +44,21 @@ class VideoFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        exoPlayer.play()
+        player.play()
     }
 
     override fun onPause() {
         super.onPause()
-        exoPlayer.pause()
+        player.pause()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        player.stop()
         _binding = null
-        exoPlayer.stop()
     }
 
     companion object {
-        private const val VIDEO_LINK = "https://www.youtube.com/watch?v=QKWAvLeayec&ab_channel=MARGO"
+        private const val VIDEO_LINK = "https://youtu.be/QKWAvLeayec"
     }
 }
