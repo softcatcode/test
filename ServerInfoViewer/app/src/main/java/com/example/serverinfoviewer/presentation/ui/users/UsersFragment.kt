@@ -21,6 +21,8 @@ class UsersFragment : Fragment() {
     val binding: FragmentUsersBinding
             get() = _binding ?: throw RuntimeException("Users fragment binding is null")
 
+    private lateinit var userListAdapter: UserListAdapter
+
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -54,14 +56,17 @@ class UsersFragment : Fragment() {
     }
 
     private fun setupObservers() {
-
+        viewModel.userList.observe(viewLifecycleOwner) {
+            userListAdapter.submitList(it)
+        }
     }
 
     private fun setupRecyclerView() = with(binding) {
         recyclerView.recycledViewPool.setMaxRecycledViews(UserListAdapter.VIEW_TYPE, 10)
-        recyclerView.adapter = UserListAdapter().apply {
+        userListAdapter = UserListAdapter().apply {
             onClickListener = ::onUserClicked
         }
+        binding.recyclerView.adapter = userListAdapter
     }
 
     override fun onDestroyView() {
