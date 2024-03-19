@@ -78,4 +78,5 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer:1.3.0")
     implementation("androidx.media3:media3-exoplayer-dash:1.3.0")
     implementation("androidx.media3:media3-ui:1.3.0")
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0")
 }
