@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.serverinfoviewer.MainActivity
 import com.example.serverinfoviewer.ServerInfoApplication
 import com.example.serverinfoviewer.databinding.FragmentUsersBinding
-import com.example.serverinfoviewer.di.ApplicationComponent
 import com.example.serverinfoviewer.presentation.ViewModelFactory
 import com.example.serverinfoviewer.presentation.adapters.UserListAdapter
 import javax.inject.Inject
@@ -57,7 +54,13 @@ class UsersFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.userList.observe(viewLifecycleOwner) {
-            userListAdapter.submitList(it)
+            when (it) {
+                is UserListState -> {
+                    userListAdapter.submitList(it.list)
+                    binding.progressBar.visibility = View.INVISIBLE
+                }
+                is Loading -> binding.progressBar.visibility = View.VISIBLE
+            }
         }
     }
 

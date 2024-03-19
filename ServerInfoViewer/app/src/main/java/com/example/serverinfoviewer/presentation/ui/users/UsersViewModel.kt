@@ -4,30 +4,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.serverinfoviewer.domain.entities.User
 import com.example.serverinfoviewer.domain.useCases.GetUsersUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class UsersViewModel @Inject constructor(
     private val getUsersUseCase: GetUsersUseCase
 ): ViewModel() {
 
-    private val _userList = MutableLiveData(listOf<User>())
-    val userList: LiveData<List<User>>
+    private val _userList = MutableLiveData<UsersViewModelState>(Loading)
+    val userList: LiveData<UsersViewModelState>
         get() = _userList
 
     init {
-        update()
+        load()
     }
 
-    fun update() {
-        val job = viewModelScope.async(Dispatchers.IO) {
+    private fun load() {
+        viewModelScope.launch(Dispatchers.IO) {
             val list = getUsersUseCase()
-            _userList.postValue(list)
+            _userList.postValue(UserListState(list))
         }
     }
 }

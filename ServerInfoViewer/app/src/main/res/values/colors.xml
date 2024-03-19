@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="idFieldColor">#61A0EC</color>
     <color name="userCardColor">#A9D8F1</color>
+    <color name="navigationBarColor">#2C6C67</color>
 </resources>
