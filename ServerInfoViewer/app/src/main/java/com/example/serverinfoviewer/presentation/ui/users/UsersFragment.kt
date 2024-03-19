@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.serverinfoviewer.ServerInfoApplication
@@ -67,6 +68,10 @@ class UsersFragment : Fragment() {
                     binding.progressBar.visibility = View.INVISIBLE
                 }
                 is Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Error -> {
+                    binding.progressBar.visibility = View.INVISIBLE
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
