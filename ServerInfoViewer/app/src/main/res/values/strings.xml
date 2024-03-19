@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ServerInfoViewer</string>
+    <string name="title_users">Users</string>
+    <string name="title_video">Video</string>
+</resources>
