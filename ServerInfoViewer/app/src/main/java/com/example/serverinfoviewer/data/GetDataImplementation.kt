@@ -52,7 +52,6 @@ class GetDataImplementation @Inject constructor(): GetDataInterface {
             val item = data.getJSONObject(i)
             result.add(unpackUser(item))
         }
-        Log.i("mumu", result.toString())
         return result
     }
 
