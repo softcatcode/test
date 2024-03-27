@@ -32,16 +32,14 @@ class UsersViewModel @Inject constructor(
     }
 
     private fun processInternetError() {
-        timer = Timer().apply{
-            schedule(
-                object: TimerTask() {
-                    override fun run() {
-                        load()
-                    }
-                },
-                RETRY_TIME_GAP
-            )
-        }
+        timer.schedule(
+            object: TimerTask() {
+                override fun run() {
+                    load()
+                }
+            },
+            RETRY_TIME_GAP
+        )
     }
 
     private fun load() {
